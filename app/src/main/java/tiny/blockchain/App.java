@@ -3,12 +3,10 @@
  */
 package tiny.blockchain;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Block start = new Block();
+        System.out.println(start.hashid+ " " + start.index + " " + start.timeStamp + " " + start.data);
     }
 }
