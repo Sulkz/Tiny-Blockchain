@@ -1,20 +1,37 @@
 package tiny.blockchain;
-import java.util.Random;
 import java.time.LocalTime;
 
 public class Block {
-    int hashid;
+    String hash;
     int index;
     String data;
     LocalTime timeStamp;
+    String prev_hash;
+
     public Block(){
         RandomHashGenerator genHash = new RandomHashGenerator();
-        
-        Random rnd = new Random();
-        this.hashid = genHash.hashString().hashCode();
-        this.index = rnd.nextInt(100);
+        this.hash = genHash.hashString();
+        this.prev_hash = "0";
+        this.index = 0;
+        this.data = "First Block";
         this.timeStamp = LocalTime.now();
-        this.data = "This is the magic key";
     }
 
+    // This is for other blockchains after
+    public Block(int index, String data, String prev_hash){
+        RandomHashGenerator genHash = new RandomHashGenerator();
+        this.hash = genHash.hashString();
+        this.index = index;
+        this.prev_hash = prev_hash;
+        this.timeStamp = LocalTime.now();
+        this.data = data;
+    }
+
+    public Block next_block(String data){
+        return new Block(this.index + 1, data, this.hash);
+    }
+    
+
 }
+
+
